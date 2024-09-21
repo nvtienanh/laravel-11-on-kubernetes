@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-queue-worker-default
+  namespace: laravel-app
+  labels:
+    tier: backend
+    layer: queue-worker
+    queue: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      layer: queue-worker
+      queue: default
+  template:
+    metadata:
+      labels:
+        tier: backend
+        layer: queue-worker
+        queue: default
+    spec:
+      containers:
+        - name: queue-worker
+          image: my-registry/cli:latest
+          command:
+            - php
+          args:
+            - artisan
+            - queue:work
+            - --queue=default
+            - --max-jobs=200
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: laravel
+            - secretRef:
+                name: laravel
+      imagePullSecrets:
+        - name: docker-registry-creds

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laravel
+  namespace: laravel-app
+data:
+  APP_NAME: "Laravel"
+  APP_ENV: "production"
+  APP_DEBUG: "true"
+  # Once you have an external URL for your application, you can add it here. 
+  APP_URL: "https://laravel.mydomain.com"
+  
+  # Update the LOG_CHANNEL to stdout for Kubernetes
+  LOG_CHANNEL: "stdout"
+  LOG_LEVEL: "debug"
+  DB_CONNECTION: "pgsql"
+  DB_HOST: "db-host"
+  DB_PORT: "5432"
+  DB_DATABASE: "app"
+  BROADCAST_DRIVER: "log"
+  CACHE_DRIVER: "file"
+  FILESYSTEM_DRIVER: "local"
+  
+  # Update the Session driver to Redis, based off part-2 of series
+  SESSION_DRIVER: "redis"
+  SESSION_LIFETIME: "120"
+  MEMCACHED_HOST: "memcached"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+
+  QUEUE_CONNECTION: "redis"

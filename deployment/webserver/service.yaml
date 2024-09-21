@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: laravel-webserver
+  namespace: laravel-app
+spec:
+  selector:
+    tier: backend
+    layer: webserver
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
